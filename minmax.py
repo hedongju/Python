@@ -4,7 +4,7 @@ def minmax(test, *args):
     for arg in args[1:]:
         if test(arg, res):
             res = arg
-        return res
+    return res
 
 def lessthan(x, y): return x < y
 def grtthan(x, y):return x > y
