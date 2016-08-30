@@ -12,11 +12,16 @@ class Person:
     def __str__(self):
         return '[Person: %s, %s]' % (self.name, self.pay)
 
-class Manager(Person):
+class Manager:
     def __init__(self, name, pay):
-        Person.__init__(self, name, 'mgr', pay)
+        self.person = Person(name, 'mgr', pay)
     def giveRaise(self, percent, bonus = .10):
-        Person.giveRaise(self, percent + bonus)
+        self.person.giveRaise(percent + bonus)
+    def __getattr__(self, attr):
+        return getattr(self.person, attr)
+    def __str__(self):
+        return str(self.person)
+
 if __name__ == '__main__':
     # self-test code
     bob = Person('Bob Smith')
