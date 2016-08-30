@@ -29,3 +29,8 @@ if __name__ == '__main__':
     tom.giveRaise(.10)
     print(tom.lastName())
     print(tom)
+
+    print('--All three --')
+    for object in (bob, sue, tom):
+        object.giveRaise(.10)
+        print(object)
