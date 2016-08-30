@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 class Person:
     def __init__(self, name, job = None, pay = 0):
         self.name = name
