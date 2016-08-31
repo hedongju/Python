@@ -19,7 +19,7 @@ if __name__ == '__main__':
             self.attr1 = TopTest.count
             self.attr2 = TopTest.count + 1
             TopTest.count += 2
-        def gatherAttrs(self):
+        def _gatherAttrs(self):
             return 'Spam'
     class SubTest(TopTest):
         pass
