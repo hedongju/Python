@@ -1,6 +1,10 @@
-#!/usr/bin/python3
-# Add customization of one behavior in a subclass
-class Person:
+#!/usr/bin/python
+# File person.py(final)
+from classtools import AttrDisplay
+class Person(AttrDisplay):
+    """
+    Create and process person records
+    """
     def __init__(self, name, job = None, pay = 0):
         self.name = name
         self.job = job
@@ -9,18 +13,15 @@ class Person:
         return self.name.split()[-1]
     def giveRaise(self, percent):
         self.pay = int(self.pay * (1 + percent))
-    def __str__(self):
-        return '[Person: %s, %s]' % (self.name, self.pay)
 
-class Manager:
+class Manager(Person):
+    """
+    A customized Person with special requirements
+    """
     def __init__(self, name, pay):
-        self.person = Person(name, 'mgr', pay)
+        Person.__init__(self, name, 'mgr', pay)
     def giveRaise(self, percent, bonus = .10):
-        self.person.giveRaise(percent + bonus)
-    def __getattr__(self, attr):
-        return getattr(self.person, attr)
-    def __str__(self):
-        return str(self.person)
+        Person.giveRaise(self, percent + bonus)
 
 if __name__ == '__main__':
     # self-test code
@@ -30,32 +31,11 @@ if __name__ == '__main__':
     print(sue)
 
     print(bob.lastName(), sue.lastName())
-    print(sue.pay)
+    sue.giveRaise(.10)
+    print(sue)
 
     tom = Manager('Tom Jones', 50000)
     tom.giveRaise(.10)
     print(tom.lastName())
     print(tom)
 
-    print('--All three --')
-    for object in (bob, sue, tom):
-        object.giveRaise(.10)
-        print(object)
-
-# Aggregate embedded objects into a composite
-class Department:
-    def __init__(self, *args):
-        self.members = list(args)
-    def addMember(self, person):
-        self.members.append(person)
-    def giveRaises(self, percent):
-        for person in self.members:
-            person.giveRaise(percent)
-    def showAll(self):
-        for person in self.members:
-            print(person)
-print('Department--------------------')
-development = Department(bob, sue)
-development.addMember(tom)
-development.giveRaises(.10)
-development.showAll()
