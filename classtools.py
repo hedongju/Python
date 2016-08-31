@@ -21,6 +21,7 @@ if __name__ == '__main__':
             TopTest.count += 2
     class SubTest(TopTest):
         pass
-    X, Y = TopTest(), SubTest()
+    X, Y, Z = TopTest(), SubTest(),  SubTest()
     print(X)
     print(Y)
+    print(Z)
